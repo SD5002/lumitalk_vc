@@ -5,7 +5,7 @@ import  ExpressError  from "../utils/ExpressError.js";
 
 
 
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import crypto from "crypto";
 
 
