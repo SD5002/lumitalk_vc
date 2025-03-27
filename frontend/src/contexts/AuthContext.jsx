@@ -36,16 +36,25 @@ export const AuthProvider = ({ children }) => {
   const handleLogin = async (userName, password) => {
     try {
       const response = await client.post("/login", { userName, password });
-
+  
+      console.log("Login Response:", response.data); // Debug log
+  
+      if (!response.data.token) {
+        console.error("No token received from server.");
+        return "Login failed: No token received.";
+      }
+  
       setUserData(response.data.user);
       localStorage.setItem("token", response.data.token); 
+      console.log("Stored Token:", localStorage.getItem("token"));
+  
       navigate("/home");
     } catch (err) {
-      const errorMessage = err.response?.data?.error || "Login failed. Please try again.";
-      console.error("Login error:", errorMessage);
-      return errorMessage;
+      console.error("Login error:", err);
+      return err.response?.data?.error || "Login failed. Please try again.";
     }
   };
+  
 
   const getHistoryOfUser = async () => {
     try {
