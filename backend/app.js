@@ -14,7 +14,7 @@ const io = connectToServer(server);
 
 app.set("PORT", (process.env.PORT || 8000));
 app.use(cors({
-  origin: "http://localhost:8001",
+  origin: "https://lumitalk-vc.onrender.com",
   credentials: true, 
 }));
 
