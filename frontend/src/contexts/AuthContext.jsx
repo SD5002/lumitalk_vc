@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({});
 
 const client = axios.create({
-  baseURL: "http://lumitalk-vc.onrender.com/api/user",
+  baseURL: "https://lumitalk-vc.onrender.com/api/user",
   withCredentials: true,
 });
 
