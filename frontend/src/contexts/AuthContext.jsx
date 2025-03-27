@@ -9,6 +9,20 @@ const client = axios.create({
   withCredentials: true,
 });
 
+
+client.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      console.error("Token expired or invalid. Please login again.");
+      localStorage.removeItem("token");
+      window.location.href = "/auth"; 
+    }
+    return Promise.reject(error);
+  }
+);
+
+
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
@@ -21,12 +35,12 @@ export const AuthProvider = ({ children }) => {
         password,
       });
 
-      console.log(response.data);
+      
       setUserData(response.data.user);
       localStorage.setItem("token", response.data.token); 
       navigate("/home");
     } catch (err) {
-      console.log(err);
+      
       const errorMessage = err.response?.data?.error || "Network Issue. Please try later.";
       console.error("Signup error:", errorMessage);
       return errorMessage;
@@ -36,25 +50,17 @@ export const AuthProvider = ({ children }) => {
   const handleLogin = async (userName, password) => {
     try {
       const response = await client.post("/login", { userName, password });
-  
-      console.log("Login Response:", response.data); // Debug log
-  
-      if (!response.data.token) {
-        console.error("No token received from server.");
-        return "Login failed: No token received.";
-      }
-  
+
       setUserData(response.data.user);
       localStorage.setItem("token", response.data.token); 
-      console.log("Stored Token:", localStorage.getItem("token"));
-  
+
       navigate("/home");
     } catch (err) {
-      console.error("Login error:", err);
-      return err.response?.data?.error || "Login failed. Please try again.";
+      const errorMessage = err.response?.data?.error || "Login failed. Please try again later.";
+      console.error("Login error:", errorMessage);
+      return errorMessage;
     }
   };
-  
 
   const getHistoryOfUser = async () => {
     try {

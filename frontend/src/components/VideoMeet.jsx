@@ -132,18 +132,18 @@ export default function VideoMeet() {
         });
 
         socketRef.current.on("user-joined", (user) => {
-            console.log("New User Joined:", user.username);
+       
             createPeerConnection(user.id, user.username);
         });
         
         socketRef.current.on("user-list", (users) => {
-            console.log("User List:", users);
+          
             users.forEach(({ id, username }) => createPeerConnection(id, username));
         });
         
     
         socketRef.current.on("user-disconnected", (userId) => {
-            console.log("User Disconnected:", userId);
+        
             if (connections[userId]) {
                 connections[userId].close();
                 delete connections[userId];
@@ -154,7 +154,7 @@ export default function VideoMeet() {
         socketRef.current.on("signal", gotMessageFromServer);
         
         socketRef.current.on("chat-message", (data) => {
-            console.log("Received message:", data);
+          
             setMessages((prevMessages) => [...prevMessages, { text: data.text, username: data.username }]);
         });
         
@@ -224,9 +224,7 @@ export default function VideoMeet() {
                         }
                     })
                     .catch((err) => console.error("Error setting remote description:", err));
-            } else {
-                console.warn("Skipping setRemoteDescription because state is already stable");
-            }
+            } 
         }
         
 
