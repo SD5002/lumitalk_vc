@@ -5,7 +5,7 @@ import server from "../../enviroment";
 export const AuthContext = createContext({});
 
 const client = axios.create({
-  baseURL: `${server}/api/user`,
+  baseURL: "https://lumitalk-vc-backend.onrender.com/api/user",
   withCredentials: true,
 });
 

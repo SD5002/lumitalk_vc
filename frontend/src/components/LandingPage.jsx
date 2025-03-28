@@ -27,9 +27,9 @@ export default function LandingPage() {
                     <p className="pt-4">
                     Connecting you with friends, family, and colleagues — anytime, anywhere. Experience seamless video calls with just one click!
                     </p>
-                    <a className="btn rounded-pill" href="/auth">
+                    <Link to="/auth" className="btn rounded-pill" >
                              Get Started
-                    </a>
+                    </Link>
 
             </div>
 
