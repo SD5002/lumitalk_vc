@@ -10,11 +10,17 @@ import WebAssetIcon from '@mui/icons-material/WebAsset';
 import WebAssetOffIcon from '@mui/icons-material/WebAssetOff';
 import { useMemo } from 'react';
 
-import io from "socket.io-client";
-const server_url = "https://lumitalk-vc.onrender.com";
 const peerConfigConnections = {
-    iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+    iceServers: [
+        { urls: "stun:stun.l.google.com:19302" }, // Google's STUN server
+        {
+            urls: "turn:openrelay.metered.ca:80",
+            username: "openrelayproject",
+            credential: "openrelayproject"
+        }
+    ]
 };
+
 
 export default function VideoMeet() {
     const [currentDateTime, setCurrentDateTime] = useState("");
