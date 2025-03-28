@@ -13,20 +13,25 @@ import { io } from "socket.io-client";
 import { useMemo } from 'react';
 
 
+const server_url="https://lumitalk-vc-backend.onrender.com";
 const peerConfigConnections = {
     iceServers: [
-        { urls: "stun:stun1.l.google.com:19302" },
-        { urls: "stun:stun2.l.google.com:19302" },
-        { urls: "stun:stun3.l.google.com:19302" },
-        { urls: "stun:stun4.l.google.com:19302" },
-        {
-            urls: "turn:relay1.expressturn.com:3478",
-            username: "ef7dbb74",
-            credential: "6z2Zbu7F"
+        { urls: ["stun:ss-turn1.xirsys.com"] }, 
+        { 
+            username: "uuakGVnALko-OylRzgAy2RHaBoM6w_0qn7pw2lEgup8oB3a4jq6CadCw1h6XTB-ZAAAAAGfmYgRzdWRlc2g=",
+            credential: "36b5a2e0-0bb1-11f0-a227-0242ac140004",
+            urls: [
+                "turn:ss-turn1.xirsys.com:80?transport=udp",
+                "turn:ss-turn1.xirsys.com:3478?transport=udp",
+                "turn:ss-turn1.xirsys.com:80?transport=tcp",
+                "turn:ss-turn1.xirsys.com:3478?transport=tcp",
+                "turns:ss-turn1.xirsys.com:443?transport=tcp",
+                "turns:ss-turn1.xirsys.com:5349?transport=tcp"
+            ]
         }
-    ],
-    iceTransportPolicy: "relay" 
+    ]
 };
+
 
 
 export default function VideoMeet() {
@@ -138,9 +143,7 @@ export default function VideoMeet() {
     };
 
     const connectToSocketServer = () => {
-
-
-        socketRef.current = io("https://lumitalk-vc-backend.onrender.com", {
+        socketRef.current = io(server_url, {
             transports: ["websocket", "polling"]
         });
         
@@ -219,9 +222,11 @@ export default function VideoMeet() {
         
     
         peerConnection.onicecandidate = (event) => {
+            
             if (event.candidate) {
                 socketRef.current.emit("signal", userId, JSON.stringify({ ice: event.candidate }));
             }
+            
         };
     
         peerConnection.createOffer()
