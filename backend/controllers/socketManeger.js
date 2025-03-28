@@ -5,14 +5,15 @@ let timeOnline = {};
 let messages = {};
 
 const connectToServer = (server) => {
-    const io = require("socket.io")(server, {
+    
+   
+    const io = new Server(server, {
         cors: {
-            origin: "*",
+            origin: "*", 
             methods: ["GET", "POST"]
         },
         transports: ["websocket", "polling"]
     });
-
     
     
 
