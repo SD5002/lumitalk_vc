@@ -133,7 +133,11 @@ export default function VideoMeet() {
     };
 
     const connectToSocketServer = () => {
-        socketRef.current = io.connect(server_url);
+        socketRef.current = io(server_url, {
+            transports: ["websocket"], 
+        });
+        
+        
     
         socketRef.current.on("connect", () => {
             socketIdRef.current = socketRef.current.id;
