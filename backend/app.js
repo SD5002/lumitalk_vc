@@ -13,7 +13,6 @@ const server=createServer(app);
 const io = connectToServer(server);
 
 app.set("PORT", (process.env.PORT || 8000));
-const cors = require('cors');
 app.use(cors({ origin: "*" })); 
 
 
