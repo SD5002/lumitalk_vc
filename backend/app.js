@@ -27,6 +27,9 @@ mongoose
   .catch((err) => console.error("DB Connection Error:", err));
 
   const _dirName=path.resolve();
+
+
+app.use(express.static(path.join(_dirName, "frontend", "dist"))); 
  
 app.use("/api/user",userRouter);
 
@@ -38,7 +41,7 @@ app.use((err, req, res, next) => {
 });
 
 
-app.use(express.static(path.join(_dirName, "frontend/dist")));
+
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(_dirName, "frontend", "dist", "index.html"));
 })
