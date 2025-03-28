@@ -4,9 +4,9 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon backend/app.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "node backend/app.js"
+    "dev": "nodemon app.js",
+
+    "start": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
