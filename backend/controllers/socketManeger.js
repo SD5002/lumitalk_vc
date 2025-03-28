@@ -7,7 +7,7 @@ let messages = {};
 const connectToServer = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: "*",
+            origin: "https://lumitalk-vc.onrender.com",
             methods: ["GET", "POST"],
             allowedHeaders: ["*"],
             credentials: true

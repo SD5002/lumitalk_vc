@@ -6,10 +6,13 @@ import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
 import MicRoundedIcon from '@mui/icons-material/MicRounded';
 import VideocamOffRoundedIcon from '@mui/icons-material/VideocamOffRounded';
 import MicOffRoundedIcon from '@mui/icons-material/MicOffRounded';
-import WebAssetIcon from '@mui/icons-material/WebAsset';
-import WebAssetOffIcon from '@mui/icons-material/WebAssetOff';
+
+import { io } from "socket.io-client";
+
 import { useMemo } from 'react';
 
+
+const server_url="https://lumitalk-vc.onrender.com";
 const peerConfigConnections = {
     iceServers: [
         { urls: "stun:stun.l.google.com:19302" }, // Google's STUN server
