@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon app.js",
 
-    "start": "node app.js"
+    "start": "node app.js",
+    "prod": "pm2 app.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
