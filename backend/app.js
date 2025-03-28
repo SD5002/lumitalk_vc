@@ -13,10 +13,9 @@ const server=createServer(app);
 const io = connectToServer(server);
 
 app.set("PORT", (process.env.PORT || 8000));
-app.use(cors({
-  origin: "https://lumitalk-vc.onrender.com",
-  credentials: true, 
-}));
+const cors = require('cors');
+app.use(cors({ origin: "*" })); 
+
 
 
 app.use(express.json({limit: "40kb"}));

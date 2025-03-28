@@ -134,8 +134,9 @@ export default function VideoMeet() {
 
     const connectToSocketServer = () => {
         socketRef.current = io(server_url, {
-            transports: ["websocket"], 
+            transports: ["websocket", "polling"]
         });
+        
         
         
     
@@ -144,15 +145,7 @@ export default function VideoMeet() {
             socketRef.current.emit("join-call", { path: window.location.href, username });
 
 
-            setInterval(() => {
-                if (socketRef.current) {
-                    socketRef.current.emit("ping");
-                }
-            }, 25000);
-        });
-
-        socketRef.current.on("pong", () => {
-            console.log("Received pong from server, connection is alive");
+            
         });
 
         
@@ -178,6 +171,10 @@ export default function VideoMeet() {
         });
         
         socketRef.current.on("signal", gotMessageFromServer);
+        socketRef.current.on("signal", (fromId, data) => {
+            console.log("Received signal from:", fromId, "Data:", data);
+        });
+        
         
         socketRef.current.on("chat-message", (data) => {
           
