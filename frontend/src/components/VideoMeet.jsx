@@ -138,7 +138,9 @@ export default function VideoMeet() {
     };
 
     const connectToSocketServer = () => {
-        socketRef.current = io(server_url, {
+
+
+        socketRef.current = io("https://lumitalk-vc-backend.onrender.com", {
             transports: ["websocket", "polling"]
         });
         
