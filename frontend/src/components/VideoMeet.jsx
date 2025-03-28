@@ -6,6 +6,7 @@ import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
 import MicRoundedIcon from '@mui/icons-material/MicRounded';
 import VideocamOffRoundedIcon from '@mui/icons-material/VideocamOffRounded';
 import MicOffRoundedIcon from '@mui/icons-material/MicOffRounded';
+import { useNavigate } from 'react-router-dom';
 
 import { io } from "socket.io-client";
 
@@ -42,6 +43,7 @@ export default function VideoMeet() {
     const intervalRef = useRef(null); 
     const [messages, setMessages] = useState([]);
     const [messageCount, setMessageCount] = useState(3);
+    const navigate = useNavigate();
 
 
     
@@ -314,7 +316,7 @@ export default function VideoMeet() {
             let tracks = localVideoRef.current.srcObject.getTracks()
             tracks.forEach(track => track.stop())
         } catch (e) { }
-        window.location.href = "/home"
+         navigate("/home")
     }
 
     
