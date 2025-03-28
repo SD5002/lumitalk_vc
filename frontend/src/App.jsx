@@ -7,6 +7,8 @@ import VideoMeet from "./components/VideoMeet.jsx";
 import PageNotFound from "./utils/PageNotFound.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
 import ProtectedRoute from "./utils/ProtectedRoute.jsx"; 
+import './App.css'
+
 
 function App() {
   return (
