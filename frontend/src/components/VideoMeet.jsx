@@ -313,12 +313,21 @@ export default function VideoMeet() {
     
     let handleEndCall = () => {
         try {
-            let tracks = localVideoRef.current.srcObject.getTracks()
-            tracks.forEach(track => track.stop())
-        } catch (e) { }
-         navigate("/home")
-    }
 
+          let tracks = localVideoRef.current.srcObject.getTracks();
+          tracks.forEach(track => track.stop());
+          socketRef.current.emit("user-disconnected", socketIdRef.current);
+    
+          
+            socketRef.current.disconnect();
+            
+        } catch (e) {
+            console.error("Error during end call:", e);
+        }
+    
+        navigate("/home");
+    };
+    
     
     
 
