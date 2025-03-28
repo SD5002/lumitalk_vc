@@ -13,16 +13,19 @@ import { io } from "socket.io-client";
 import { useMemo } from 'react';
 
 
-const server_url="https://lumitalk-vc-backend.onrender.com";
 const peerConfigConnections = {
     iceServers: [
-        { urls: "stun:stun.l.google.com:19302" }, // Google's STUN server
+        { urls: "stun:stun1.l.google.com:19302" },
+        { urls: "stun:stun2.l.google.com:19302" },
+        { urls: "stun:stun3.l.google.com:19302" },
+        { urls: "stun:stun4.l.google.com:19302" },
         {
-            urls: "turn:openrelay.metered.ca:80",
-            username: "openrelayproject",
-            credential: "openrelayproject"
+            urls: "turn:relay1.expressturn.com:3478",
+            username: "ef7dbb74",
+            credential: "6z2Zbu7F"
         }
-    ]
+    ],
+    iceTransportPolicy: "relay" 
 };
 
 
