@@ -142,7 +142,20 @@ export default function VideoMeet() {
         socketRef.current.on("connect", () => {
             socketIdRef.current = socketRef.current.id;
             socketRef.current.emit("join-call", { path: window.location.href, username });
+
+
+            setInterval(() => {
+                if (socketRef.current) {
+                    socketRef.current.emit("ping");
+                }
+            }, 25000);
         });
+
+        socketRef.current.on("pong", () => {
+            console.log("Received pong from server, connection is alive");
+        });
+
+        
 
         socketRef.current.on("user-joined", (user) => {
        

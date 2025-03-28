@@ -26,6 +26,12 @@ const connectToServer = (server) => {
             connections[path].push({ id: socket.id, username });
         
             timeOnline[socket.id] = new Date();
+            
+            
+
+            socket.on("ping", () => {
+                socket.emit("pong"); 
+            });
         
             // Ensure all users get the correct usernames
             connections[path].forEach(({ id }) => {
