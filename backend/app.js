@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import connectToServer from "./controllers/socketManeger.js";
 import userRouter from "./routers/userRouter.js";
-import path from "path";
 
 const app = express();
 const server=createServer(app);
@@ -26,10 +25,7 @@ mongoose
   .then(() => console.log("DB Connected"))
   .catch((err) => console.error("DB Connection Error:", err));
 
-  const _dirName=path.resolve();
-
-
-app.use(express.static(path.join(_dirName, "frontend", "dist"))); 
+ 
  
 app.use("/api/user",userRouter);
 
@@ -42,9 +38,6 @@ app.use((err, req, res, next) => {
 
 
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(_dirName, "frontend", "dist", "index.html"));
-})
 
 
 server.listen(app.get("PORT"),()=>{
